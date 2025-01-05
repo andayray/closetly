@@ -1,5 +1,27 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap'); /* Import Poppins font */
 
+/* General reset to avoid extra space */
+html, body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden; /* Prevent unnecessary scrolling */
+    height: 100%; /* Ensure the body takes the full height */
+    box-sizing: border-box;
+}
+
+/*Logo*/
+.logo-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 7px; /* Ensure no extra space above the logo */
+}
+
+.logo {
+    width: 55px; /* Fixed size for the logo */
+    height: auto; /* Maintain aspect ratio */
+}
+
 /* Add this CSS to style the Hello text */
 .hello-text {
     font-family: 'Poppins', sans-serif; /* Use Poppins with fallback to sans-serif */

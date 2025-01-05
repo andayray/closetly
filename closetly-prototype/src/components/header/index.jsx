@@ -2,13 +2,21 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../contexts/authContext';
 import { doSignOut } from '../../firebase/auth';
+import './index.css'; // Import the CSS file
 
 const Header = () => {
     const navigate = useNavigate();
-    const { userLoggedIn } = useAuth();
+    const { userLoggedIn, currentUser } = useAuth();
 
     return (
-        <nav className="flex flex-row gap-x-2 w-full z-20 fixed top-0 left-0 h-12 border-b place-content-center items-center bg-gray-200">
+        <nav className="header-nav">
+
+            {/* Display user info on the left side */}
+            <div className="user-info">
+                Hello, {currentUser?.displayName ? currentUser.displayName : currentUser?.email}
+            </div>
+
+            {/* Logout button on the right side */}
             {userLoggedIn && (
                 <button
                     onClick={async () => {
@@ -19,7 +27,7 @@ const Header = () => {
                             console.error('Failed to log out:', error);
                         }
                     }}
-                    className="text-sm text-blue-600 underline"
+                    className="logout-button"
                 >
                     Logout
                 </button>

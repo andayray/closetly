@@ -47,7 +47,13 @@ const Login = () => {
             {/* Redirect to home if the user is logged in */}
             {userLoggedIn && <Navigate to={'/home'} replace={true} />}
 
+            {/* Logo Section */}
+            <div className="logo-container">
+                <img src="/closetlyLogo.png" alt="Closetly Logo" className="logo" />
+            </div>
+
             <main className="w-full h-screen flex self-center place-content-center place-items-center">
+
                 <div className="w-96 text-gray-600 space-y-5 p-4 shadow-xl border rounded-xl">
                     
                     {/* Header Section */}

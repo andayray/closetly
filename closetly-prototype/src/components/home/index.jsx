@@ -12,7 +12,7 @@ const Home = () => {
     return (
         
         <div className="text-2xl font-bold pt-14">
-            Hello {currentUser.displayName ? currentUser.displayName : currentUser.email}, you are now logged in.
+            Currently Logged in
         </div>
     );
 };
