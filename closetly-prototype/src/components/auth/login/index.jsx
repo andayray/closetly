@@ -1,11 +1,10 @@
-import React, {useState} from 'react'
-import {Navigate, Link} from 'react-router-dom'
+import React, { useState } from 'react'
+import { Navigate, Link } from 'react-router-dom'
 import { doSignInWithEmailAndPassword, doSignInWithGoogle } from '../../../firebase/auth'
 import { useAuth } from '../../../contexts/authContext'
 
 const Login = () => {
-
-    const {userLoggedIn} = useAuth()
+    const { userLoggedIn } = useAuth()
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -13,22 +12,30 @@ const Login = () => {
     const [errorMessage, setErrorMessage] = useState('')
 
     const onSubmit = async (e) => {
-        e.preventDefault()
-        if(!isSigningIn) {
-            setIsSigningIn(true)
-            await doSignInWithEmailAndPassword(email, password)
+        e.preventDefault();
+        if (!isSigningIn) {
+            setIsSigningIn(true);
+            try {
+                await doSignInWithEmailAndPassword(email, password);
+            } catch (error) {
+                setErrorMessage('Failed to sign in. Please check your credentials.');
+                setIsSigningIn(false);
+            }
         }
-    }
+    };
 
-    const onGoogleSignIn = (e) => {
-        e.preventDefault()
-        if(!isSigningIn){
-            setIsSigningIn(true)
-            doSignInWithGoogle().catch(err => {
-                setIsSigningIn(false)
-            })
+    const onGoogleSignIn = async (e) => {
+        e.preventDefault();
+        if (!isSigningIn) {
+            setIsSigningIn(true);
+            try {
+                await doSignInWithGoogle();
+            } catch (error) {
+                setErrorMessage('Google sign-in failed.');
+                setIsSigningIn(false);
+            }
         }
-    }
+    };
 
     return (
         <div>
@@ -73,9 +80,11 @@ const Login = () => {
                         </div>
 
                         {errorMessage && (
-                            <span className='text-red-600 font-bold'>{errorMessage}</span>
+                            <div className="text-red-600 font-bold w-full text-sm text-center">
+                                {errorMessage}
+                            </div>
                         )}
-
+                        
                         <button
                             type="submit"
                             disabled={isSigningIn}
@@ -111,5 +120,6 @@ const Login = () => {
             </main>
         </div>
     )
-
 }
+
+export default Login
