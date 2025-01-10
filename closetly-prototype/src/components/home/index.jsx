@@ -1,4 +1,4 @@
-import React, {useRef, useState, useEffect } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { Navigate } from 'react-router-dom';
 import { useAuth } from '../../contexts/authContext';
 import './home.css'; // Import the CSS file
@@ -17,18 +17,18 @@ const imgs = [
 const Home = () => {
     const { currentUser } = useAuth();
     const carouselRef = useRef(null); // Ref for the carousel
-    const firstImgWidth = useRef(0); // Store first image width
     const [imgWidth, setImgWidth] = useState(0); // Store the width of one image
     const [isDragStart, setIsDragStart] = useState(false); // Track if dragging has started
     const [startX, setStartX] = useState(0); // Initial mouse position
     const [scrollLeft, setScrollLeft] = useState(0); // Initial scroll position
+    const [hideRightArrow, setHideRightArrow] = useState(false); // Control right arrow visibility
 
     useEffect(() => {
         const updateWidth = () => {
             if (carouselRef.current) {
                 const firstImg = carouselRef.current.querySelector("img");
                 if (firstImg) {
-                    setImgWidth(firstImg.clientWidth + 51);
+                    setImgWidth(firstImg.clientWidth + 51); // Adjust for margin
                 }
             }
         };
@@ -43,7 +43,29 @@ const Home = () => {
         return () => observer.disconnect();
     }, []);
 
-    const handleScroll = (direction) => {
+    useEffect(() => {
+        const handleScroll = () => {
+            if (!carouselRef.current || imgWidth === 0) return;
+
+            const maxScrollLeft = (imgs.length * imgWidth) - (3 * imgWidth);
+            const currentScrollLeft = carouselRef.current.scrollLeft;
+
+            // Hide right arrow when at the last image
+            setHideRightArrow(currentScrollLeft >= maxScrollLeft - 1);
+        };
+
+        if (carouselRef.current) {
+            carouselRef.current.addEventListener('scroll', handleScroll);
+        }
+
+        return () => {
+            if (carouselRef.current) {
+                carouselRef.current.removeEventListener('scroll', handleScroll);
+            }
+        };
+    }, [imgWidth]);
+
+    const scrollCarousel = (direction) => {
         if (!carouselRef.current || imgWidth === 0) return;
         const scrollAmount = direction === "left" ? -imgWidth : imgWidth;
         carouselRef.current.scrollLeft += scrollAmount;
@@ -74,32 +96,29 @@ const Home = () => {
     }
 
     return (
-        <>
-
-<div className="wrapper">
+        <div className="wrapper">
             <i
                 className="fa-icon fa-solid fa-angle-left fa-icon-left"
-                onClick={() => handleScroll("left")}
+                onClick={() => scrollCarousel("left")}
             ></i>
 
             <div
                 className="carousel"
                 ref={carouselRef}
-                style={{ cursor: 'grab' }}
+                style={{ cursor: 'grab', overflowX: 'scroll', display: 'flex' }}
             >
                 {imgs.map((imgSrc, idx) => (
                     <img key={idx} src={imgSrc} alt={`Slide ${idx + 1}`} />
                 ))}
             </div>
 
-            <i
-                className="fa-icon fa-solid fa-angle-right fa-icon-right"
-                onClick={() => handleScroll("right")}
-            ></i>
+            {!hideRightArrow && (
+                <i
+                    className="fa-icon fa-solid fa-angle-right fa-icon-right"
+                    onClick={() => scrollCarousel("right")}
+                ></i>
+            )}
         </div>
-
-        </>
-
     );
 };
 
