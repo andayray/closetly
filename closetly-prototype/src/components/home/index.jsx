@@ -12,6 +12,8 @@ const imgs = [
     "outer-3.jpg",
     "outer-4.jpg",
     "outer-5.jpg",
+    "outer-1.jpg",
+    "outer-2.jpg",
 ];
 
 const Home = () => {
@@ -22,13 +24,14 @@ const Home = () => {
     const [startX, setStartX] = useState(0); // Initial mouse position
     const [scrollLeft, setScrollLeft] = useState(0); // Initial scroll position
     const [hideRightArrow, setHideRightArrow] = useState(false); // Control right arrow visibility
+    const [hideLeftArrow, setHideLeftArrow] = useState(true); // Control left arrow visibility
 
     useEffect(() => {
         const updateWidth = () => {
             if (carouselRef.current) {
                 const firstImg = carouselRef.current.querySelector("img");
                 if (firstImg) {
-                    setImgWidth(firstImg.clientWidth + 51); // Adjust for margin
+                    setImgWidth(firstImg.clientWidth + 50); // Adjust for margin
                 }
             }
         };
@@ -47,11 +50,12 @@ const Home = () => {
         const handleScroll = () => {
             if (!carouselRef.current || imgWidth === 0) return;
 
-            const maxScrollLeft = (imgs.length * imgWidth) - (3 * imgWidth);
+            const maxScrollLeft = carouselRef.current.scrollWidth - carouselRef.current.clientWidth;
             const currentScrollLeft = carouselRef.current.scrollLeft;
 
             // Hide right arrow when at the last image
             setHideRightArrow(currentScrollLeft >= maxScrollLeft - 1);
+            setHideLeftArrow(currentScrollLeft <= 0);
         };
 
         if (carouselRef.current) {
@@ -97,10 +101,13 @@ const Home = () => {
 
     return (
         <div className="wrapper">
-            <i
-                className="fa-icon fa-solid fa-angle-left fa-icon-left"
-                onClick={() => scrollCarousel("left")}
-            ></i>
+
+            {!hideLeftArrow && (
+                <i
+                    className="fa-icon fa-solid fa-angle-left fa-icon-left"
+                    onClick={() => scrollCarousel("left")}
+                ></i>
+            )}
 
             <div
                 className="carousel"

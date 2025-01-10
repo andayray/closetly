@@ -11,7 +11,7 @@ body {
     align-items: center;
     justify-content: center;
     min-height: 100vh;
-    background-color: navy;
+    background-color: white;
 }
 
 .wrapper {
@@ -72,6 +72,7 @@ body {
     width: 50px;
     cursor: pointer;
     position: absolute;
+    outline: auto;
     font-size: 1.2rem;
     background: white;
     text-align: center;
