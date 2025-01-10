@@ -24,11 +24,23 @@ const Home = () => {
     const [scrollLeft, setScrollLeft] = useState(0); // Initial scroll position
 
     useEffect(() => {
-        // Calculate the width of the first image, including margin
+        const updateWidth = () => {
+            if (carouselRef.current) {
+                const firstImg = carouselRef.current.querySelector("img");
+                if (firstImg) {
+                    setImgWidth(firstImg.clientWidth + 51);
+                }
+            }
+        };
+
+        const observer = new ResizeObserver(updateWidth);
         if (carouselRef.current) {
-            const firstImg = carouselRef.current.querySelector("img");
-            setImgWidth(firstImg.clientWidth + 51); // 15 is the margin between images
+            observer.observe(carouselRef.current);
         }
+
+        updateWidth(); // Initial width calculation
+
+        return () => observer.disconnect();
     }, []);
 
     const handleScroll = (direction) => {
