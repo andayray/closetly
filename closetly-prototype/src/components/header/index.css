@@ -6,9 +6,9 @@
     justify-content: space-between; /* Space between user info and logout button */
     align-items: center;
     width: 100%;
-    height: 3rem; /* Matches Tailwind h-12 */
+    height: 4rem; /* Matches Tailwind h-12 */
     padding: 0 1rem;
-    background-color: #e5e7eb; /* Matches Tailwind bg-gray-200 */
+    background-color: #D8C4B6; /* Matches Tailwind bg-gray-200 */
     border-bottom: 1px solid #d1d5db; /* Matches Tailwind border-b */
     position: fixed;
     top: 0;
@@ -25,7 +25,7 @@
 /* Logout button (right side) */
 .logout-button {
     font-size: 0.875rem; /* Matches Tailwind text-sm */
-    color: #2563eb; /* Matches Tailwind text-blue-600 */
+    color: #4b5563; /* Matches Tailwind text-blue-600 */
     text-decoration: underline;
     cursor: pointer;
     background: none;

@@ -3,13 +3,13 @@ import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 
 const firebaseConfig = {
-    apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
-    authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
-    projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
-    storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
-    messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
-    appId: process.env.REACT_APP_FIREBASE_APP_ID,
-    measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID,
+    apiKey: 'AIzaSyC1JFZgemz63uLQ6ZsnbtFtDBqWe63XTXs',
+    authDomain: 'auth-for-closetly.firebaseapp.com',
+    projectId: 'auth-for-closetly',
+    storageBucket: 'auth-for-closetly.appspot.com',
+    messagingSenderId: '318990444412',
+    appId: '1:318990444412:web:ee142ad7bad3b55da2a6f9',
+    measurementId: 'G-RR3X27F3MW',
 };
 
 // Initialize Firebase

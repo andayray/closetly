@@ -112,3 +112,74 @@ html, body {
 .inputGroup input:valid {
     border-color: #FA4EAB;
 }
+
+/* From Uiverse.io by catraco */
+.container {
+  --color: #a5a5b0;
+  --size: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  right: 10px; /* Align to the right of the input field */
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  font-size: var(--size);
+  user-select: none;
+  fill: var(--color);
+}
+
+.container .eye {
+  position: absolute;
+  animation: keyframes-fill .5s;
+}
+
+.container .eye-slash {
+  position: absolute;
+  animation: keyframes-fill .5s;
+  display: none;
+}
+
+.container input:checked ~ .eye {
+  display: none;
+}
+
+.container input:checked ~ .eye-slash {
+  display: block;
+}
+
+.container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+@keyframes keyframes-fill {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+
+  50% {
+    transform: scale(1.2);
+  }
+}
+.view-password-toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #fa4eab; /* Match your branding color */
+    font-size: 0.9rem;
+    font-weight: bold;
+}
+.view-password-toggle:hover {
+    color: #af3777;
+}
+

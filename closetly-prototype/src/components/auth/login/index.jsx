@@ -11,6 +11,8 @@ const Login = () => {
     const [password, setPassword] = useState('');
     const [isSigningIn, setIsSigningIn] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
+    const [showPassword, setShowPassword] = useState(false);
+
 
     // Handles form submission for email/password login
     const onSubmit = async (e) => {
@@ -72,7 +74,6 @@ const Login = () => {
                                 required
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
-                                className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg transition duration-300"
                             />
                             <label htmlFor="email">Email</label>
                         </div>
@@ -80,7 +81,7 @@ const Login = () => {
                         {/* Password Input */}
                         <div className="inputGroup">
                             <input
-                                type="password"
+                                type={showPassword ? "text" : "password"}
                                 id="password"
                                 required
                                 autoComplete="current-password"
@@ -88,9 +89,15 @@ const Login = () => {
                                 onChange={(e) => setPassword(e.target.value)}
                             />
                             <label htmlFor="password">Password</label>
+                            <button
+                                type="button"
+                                className="view-password-toggle"
+                                onClick={() => setShowPassword((prev) => !prev)}
+                            >
+                                {showPassword ? "Hide" : "Show"}
+                            </button>
                         </div>
 
-                        
                         {/* Error Message */}
                         {errorMessage && (
                             <div className="text-red-600 font-bold w-full text-sm text-center">
