@@ -1,0 +1,103 @@
+* {
+    margin-top: 0;
+    padding: 0; /* Adjust padding to avoid extra spacing */
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    padding: 0 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background-color: navy;
+}
+
+.wrapper {
+    max-width: 1600px;
+    margin-top: 90px;
+
+    position: relative;
+}
+
+.wrapper i {
+    top: 50%;
+    height: 50px;
+    width: 50px;
+    cursor: pointer;
+    position: absolute;
+    font-size: 1.2rem;
+    background: #fff;
+    text-align: center;
+    line-height: 50px;
+    border-radius: 50%;
+    transform: translateY(-50%); /* Adjust for perfect centering */
+}
+
+.wrapper i:first-child{
+    left: -23px;
+}
+
+.wrapper i:last-child{
+    right: -23px;
+}
+
+.wrapper .carousel {
+    display: flex; /* Use flexbox to align images horizontally */
+    font-size: 0 px;
+    cursor: pointer;
+    overflow-x: hidden; /* Enable horizontal scrolling */
+    white-space: nowrap;
+    gap: 10px;
+}
+
+.carousel img {
+    height: 450px; /* Fixed height */
+    object-fit: cover; /* Ensures image content is properly cropped if needed */
+    flex-shrink: 0; /* Prevent images from shrinking */
+    margin-left: 15px;
+    width: calc(100%/3); /* Let the width adjust automatically based on the image */
+}
+
+.carousel img:first-child{
+    margin-left: 0px;
+}
+
+/* General icon styling */
+.fa-icon {
+    display: absolute;
+    top: 50%;
+    height: 50px;
+    width: 50px;
+    cursor: pointer;
+    position: absolute;
+    font-size: 1.2rem;
+    background: white;
+    text-align: center;
+    border-radius: 50%;
+    justify-content: center;
+    transform: translateY(-175px);
+}
+/* Left arrow styling */
+.fa-icon-left {
+    left: 235px;
+    
+}
+
+/* Right arrow styling */
+.fa-icon-right {
+    right: 235px;
+}
+
+@media screen and (max-width: 800px){
+    .carousel img{
+        width: calc(100% / 2);
+    }
+}
+
+@media screen and (max-width: 535px){
+    .carousel img{
+        width: 100%;
+    }
+}
