@@ -6,15 +6,7 @@ import '@fortawesome/fontawesome-free/css/all.min.css';
 
 const AUTO_DELAY = 10000; // 10 seconds
 const DRAG_BUFFER = 50; // Threshold for drag detection
-const imgs = [
-    "outer-1.jpg",
-    "outer-2.jpg",
-    "outer-3.jpg",
-    "outer-4.jpg",
-    "outer-5.jpg",
-    "outer-1.jpg",
-    "outer-2.jpg",
-];
+
 
 const Home = () => {
     const { currentUser } = useAuth();
@@ -25,6 +17,14 @@ const Home = () => {
     const [scrollLeft, setScrollLeft] = useState(0); // Initial scroll position
     const [hideRightArrow, setHideRightArrow] = useState(false); // Control right arrow visibility
     const [hideLeftArrow, setHideLeftArrow] = useState(true); // Control left arrow visibility
+
+    const [imgs, setImgs] = useState([
+        "outer-1.jpg",
+        "outer-2.jpg",
+        "outer-3.jpg",
+        "outer-4.jpg",
+        "outer-5.jpg",
+    ]); // Default images
 
     useEffect(() => {
         const updateWidth = () => {
@@ -75,24 +75,10 @@ const Home = () => {
         carouselRef.current.scrollLeft += scrollAmount;
     };
 
-    const dragStart = (e) => {
-        setIsDragStart(true);
-        setStartX(e.pageX || e.touches[0].pageX);
-        setScrollLeft(carouselRef.current.scrollLeft);
-        carouselRef.current.style.cursor = 'grabbing';
-    };
-
-    const dragging = (e) => {
-        if (!isDragStart) return;
-        e.preventDefault();
-        const currentX = e.pageX || e.touches[0].pageX;
-        const distance = currentX - startX;
-        carouselRef.current.scrollLeft = scrollLeft - distance;
-    };
-
-    const dragStop = () => {
-        setIsDragStart(false);
-        carouselRef.current.style.cursor = 'grab';
+    const handleImageUpload = (event) => {
+        const files = Array.from(event.target.files);
+        const newImgs = files.map((file) => URL.createObjectURL(file));
+        setImgs((prevImgs) => [...prevImgs, ...newImgs]);
     };
 
     if (!currentUser) {
@@ -100,7 +86,22 @@ const Home = () => {
     }
 
     return (
+
         <div className="wrapper">
+
+            <div className="upload-container">
+                <label htmlFor="upload" className="upload-button">
+                    Upload Images
+                </label>
+                <input
+                    type="file"
+                    id="upload"
+                    multiple
+                    accept="image/*"
+                    onChange={handleImageUpload}
+                    style={{ display: "none" }}
+                />
+            </div>
 
             {!hideLeftArrow && (
                 <i
@@ -125,6 +126,10 @@ const Home = () => {
                     onClick={() => scrollCarousel("right")}
                 ></i>
             )}
+
+            
+
+
         </div>
     );
 };
