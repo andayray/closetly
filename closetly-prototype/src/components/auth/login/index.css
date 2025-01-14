@@ -14,7 +14,6 @@ html, body {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 7px; /* Ensure no extra space above the logo */
 }
 
 .logo {
