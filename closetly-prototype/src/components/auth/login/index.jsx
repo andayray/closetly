@@ -6,13 +6,11 @@ import './index.css';
 
 const Login = () => {
     const { userLoggedIn } = useAuth();
-
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [isSigningIn, setIsSigningIn] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
     const [showPassword, setShowPassword] = useState(false);
-
 
     // Handles form submission for email/password login
     const onSubmit = async (e) => {

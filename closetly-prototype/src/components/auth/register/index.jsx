@@ -52,7 +52,6 @@ const Register = () => {
                         <h3 className="create-text">Create a New Account</h3>
                     </div>
 
-
                     {/* Form Section */}
                     <form onSubmit={onSubmit} className="space-y-4">
                         
@@ -110,7 +109,6 @@ const Register = () => {
                         >
                             {isRegistering ? 'Signing Up...' : 'Sign Up'}
                         </button>
-
 
                         {/* Login Link */}
                         <div className="text-sm text-center">
